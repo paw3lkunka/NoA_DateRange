@@ -20,7 +20,7 @@ public class DateRangeServiceTest {
     // Act
     string result = service.CreateString(startDate, endDate);
     // Assert
-    Assert.Equal(result, expectedResult);
+    Assert.Equal(expectedResult, result);
   }
 
   [Fact]
@@ -64,6 +64,25 @@ public class DateRangeServiceTest {
       Action createStringAction = () => service.CreateString(startDate, endDate);
       // Assert
       Assert.Throws<FormatException>(createStringAction);
+    });
+  }
+  
+  [Theory]
+  [InlineData("en_US", "04/07/2000", "07/04/2000", "07.04 - 04.07.2000")]
+  [InlineData("pl_PL", "07/04/2000", "04/07/2000", "07.04 - 04.07.2000")]
+  public async Task CreateString_DifferentCultures_ReturnsExpectedString(
+      string cultureName, 
+      string startDate, 
+      string endDate, 
+      string expectedResult) {
+    // Arrange
+    IDateRangeService service = new DateRangeService();
+    await Task.Run(() => {
+      // Act
+      CultureInfo.CurrentCulture = new CultureInfo(cultureName);
+      string result = service.CreateString(startDate, endDate);
+      // Assert
+      Assert.Equal(expectedResult, result);
     });
   }
 }
