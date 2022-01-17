@@ -1,5 +1,8 @@
 namespace NoA.DateRange.Services;
 
+/// <summary>
+/// Service to privide date range string formatting utilities
+/// </summary>
 public interface IDateRangeService {
   /// <summary>
   /// <p>Creates shorthand string representation of date range as follows:</p>
@@ -14,6 +17,6 @@ public interface IDateRangeService {
   /// <returns>String that represents date range</returns>
   string CreateString(DateOnly startDate, DateOnly endDate);
 
-  /// <inheritdoc cref="CreateString"/>
+  /// <inheritdoc cref="CreateString(System.DateOnly,System.DateOnly)"/>
   string CreateString(string startDate, string endDate);
 }
