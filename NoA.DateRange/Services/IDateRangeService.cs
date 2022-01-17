@@ -12,8 +12,8 @@ public interface IDateRangeService {
   /// <param name="startDate">Start date of date range</param>
   /// <param name="endDate">End date of date range</param>
   /// <returns>String that represents date range</returns>
-  string DateRangeToString(DateOnly startDate, DateOnly endDate);
+  string CreateString(DateOnly startDate, DateOnly endDate);
 
-  /// <inheritdoc cref="DateRangeToString(System.DateOnly,System.DateOnly)"/>
-  string DateRangeToString(string startDate, string endDate);
+  /// <inheritdoc cref="CreateString"/>
+  string CreateString(string startDate, string endDate);
 }
