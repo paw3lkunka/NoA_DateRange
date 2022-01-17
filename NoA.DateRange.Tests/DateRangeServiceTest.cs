@@ -20,4 +20,16 @@ public class DateRangeServiceTest {
     // Assert
     Assert.Equal(result, expectedResult);
   }
+
+  [Fact]
+  public void CreateString_StartDateGreaterThanEndDate_ThrowsArgumentException() {
+    // Arrange
+    IDateRangeService service = new DateRangeService();
+    DateOnly startDate = new DateOnly(9999, 12, 31);
+    DateOnly endDate = new DateOnly(0001, 01, 01);
+    // Act
+    Action createStringAction = () => service.CreateString(startDate, endDate);
+    // Assert
+    Assert.Throws<ArgumentException>(createStringAction);
+  }
 }
