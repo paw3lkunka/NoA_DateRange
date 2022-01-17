@@ -1,5 +1,5 @@
 using System.Globalization;
-
+using System.Threading.Tasks;
 using Xunit;
 using NoA.DateRange.Services;
 
@@ -39,25 +39,31 @@ public class DateRangeServiceTest {
   [InlineData(null, "9999-12-31")]
   [InlineData("0001-01-01", null)]
   [InlineData(null, null)]
-  public void CreateString_DateStringsNull_ThrowsArgumentNullException(string startDate, string endDate) {
+  public async Task CreateString_DateStringsNull_ThrowsArgumentNullException(string startDate, string endDate) {
     // Arrange
     IDateRangeService service = new DateRangeService();
-    // Act
-    Action createStringAction = () => service.CreateString(startDate, endDate);
-    // Assert
-    Assert.Throws<ArgumentNullException>(createStringAction);
+    await Task.Run(() => {
+      // Act
+      CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+      Action createStringAction = () => service.CreateString(startDate, endDate);
+      // Assert
+      Assert.Throws<ArgumentNullException>(createStringAction);
+    });
   }
 
   [Theory]
   [InlineData("12345678", "9999-12-31")]
   [InlineData("0001-01-01", "12345678")]
   [InlineData("12345678", "12345678")]
-  public void CreateString_DateStringInvalidFormat_ThrowsFormatException(string startDate, string endDate) {
+  public async Task CreateString_DateStringInvalidFormat_ThrowsFormatException(string startDate, string endDate) {
     // Arrange
     IDateRangeService service = new DateRangeService();
-    // Act
-    Action createStringAction = () => service.CreateString(startDate, endDate);
-    // Assert
-    Assert.Throws<FormatException>(createStringAction);
+    await Task.Run(() => {
+      // Act
+      CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+      Action createStringAction = () => service.CreateString(startDate, endDate);
+      // Assert
+      Assert.Throws<FormatException>(createStringAction);
+    });
   }
 }
