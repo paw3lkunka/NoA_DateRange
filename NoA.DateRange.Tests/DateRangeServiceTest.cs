@@ -7,32 +7,38 @@ namespace NoA.DateRange.Tests;
 
 public class DateRangeServiceTest {
   public static IEnumerable<object[]> Data_CreateString_ValidInput_ValidResult = new List<object[]>() {
-    new object[] {DateOnly.MinValue, new DateOnly(0001, 01, 31), "01 - 31.01.0001"},
-    new object[] {DateOnly.MinValue, new DateOnly(0001, 12, 31), "01.01 - 31.12.0001"},
-    new object[] {DateOnly.MinValue, DateOnly.MaxValue, "01.01.0001 - 31.12.9999"},
+    new object[] {DateOnly.MinValue, new DateOnly(0001, 01, 31), "01/01 - 31/0001"},
+    new object[] {DateOnly.MinValue, new DateOnly(0001, 12, 31), "01/01 - 12/31/0001"},
+    new object[] {DateOnly.MinValue, DateOnly.MaxValue, "01/01/0001 - 12/31/9999"},
   };
 
   [Theory]
   [MemberData(nameof(Data_CreateString_ValidInput_ValidResult))]
-  public void CreateString_ValidInput_ValidResult(DateOnly startDate, DateOnly endDate, string expectedResult) {
+  public async Task CreateString_ValidInput_ValidResult(DateOnly startDate, DateOnly endDate, string expectedResult) {
     // Arrange
     IDateRangeService service = new DateRangeService();
-    // Act
-    string result = service.CreateString(startDate, endDate);
-    // Assert
-    Assert.Equal(expectedResult, result);
+    await Task.Run(() => {
+      CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+      // Act
+      string result = service.CreateString(startDate, endDate);
+      // Assert
+      Assert.Equal(expectedResult, result);
+    });
   }
 
   [Fact]
-  public void CreateString_StartDateGreaterThanEndDate_ThrowsArgumentException() {
+  public async Task CreateString_StartDateGreaterThanEndDate_ThrowsArgumentException() {
     // Arrange
     IDateRangeService service = new DateRangeService();
     DateOnly startDate = DateOnly.MaxValue;
     DateOnly endDate = DateOnly.MinValue;
-    // Act
-    Action createStringAction = () => service.CreateString(startDate, endDate);
-    // Assert
-    Assert.Throws<ArgumentException>(createStringAction);
+    await Task.Run(() => {
+      CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+      // Act
+      Action createStringAction = () => service.CreateString(startDate, endDate);
+      // Assert
+      Assert.Throws<ArgumentException>(createStringAction);
+    });
   }
 
   [Theory]
@@ -68,8 +74,15 @@ public class DateRangeServiceTest {
   }
   
   [Theory]
-  [InlineData("en_US", "04/07/2000", "07/04/2000", "07.04 - 04.07.2000")]
+  [InlineData("en_US", "04/04/2000", "04/07/2000", "4/4 - 7/2000")]
+  [InlineData("pl_PL", "04/07/2000", "07/07/2000", "04 - 07.07.2000")]
+  [InlineData("af-NA", "2000-07-04", "2000-07-07", "2000-07-04 - 07")]
+  [InlineData("en_US", "04/07/2000", "07/04/2000", "4/7 - 7/4/2000")]
   [InlineData("pl_PL", "07/04/2000", "04/07/2000", "07.04 - 04.07.2000")]
+  [InlineData("af-NA", "2000-04-07", "2000-07-04", "2000-04-07 - 07-04")]
+  [InlineData("en_US", "04/07/2000", "07/04/2001", "4/7/2000 - 7/4/2001")]
+  [InlineData("pl_PL", "07/04/2000", "04/07/2001", "07.04.2000 - 04.07.2001")]
+  [InlineData("af-NA", "2000-04-07", "2001-07-04", "2000-04-07 - 2001-07-04")]
   public async Task CreateString_DifferentCultures_ReturnsExpectedString(
       string cultureName, 
       string startDate, 

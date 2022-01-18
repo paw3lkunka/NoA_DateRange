@@ -1,4 +1,7 @@
 using System.Globalization;
+using System.Net.Mail;
+
+using NoA.DateRange.Enums;
 
 namespace NoA.DateRange.Services; 
 
@@ -7,20 +10,50 @@ public class DateRangeService : IDateRangeService {
   /// <inheritdoc/>
   /// <exception cref="ArgumentException">startDate is greater than or equal endDate</exception>
   public string CreateString(DateOnly startDate, DateOnly endDate) {
+    // Check if arguments are valid
     if (startDate >= endDate) {
       throw new ArgumentException("Start date must be an earlier date than end date");
+    }
+    // Get date format for current culture
+    string dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+    // Get date format components volume e.g. "dd" & "d", "yyyy" & "yy" etc.
+    string[] ymd = dateFormat.Split(CultureInfo.CurrentCulture.DateTimeFormat.DateSeparator);
+    // Get date format components order
+    DateFormatOrder dateFormatOrder;
+    if (dateFormat.StartsWith('y')) {
+      dateFormatOrder = DateFormatOrder.BigEndian;
+    }
+    else if (dateFormat.StartsWith('d')) {
+      dateFormatOrder = DateFormatOrder.LittleEndian;
+    }
+    else {
+      dateFormatOrder = DateFormatOrder.MiddleEndian;
     }
     // Check if years and/or months are equal
     if (startDate.Year == endDate.Year) {
       if (startDate.Month == endDate.Month) {
-        return $"{startDate.ToString("dd")} - {endDate.ToString("dd.MM.yyyy")}";
+        return dateFormatOrder switch {
+          DateFormatOrder.BigEndian => 
+            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")} - {endDate.ToString(ymd[2])}",
+          DateFormatOrder.LittleEndian => 
+            $"{startDate.ToString(ymd[0])} - {endDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")}",
+          DateFormatOrder.MiddleEndian => 
+            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}")} - {endDate.ToString($"{ymd[1]}/{ymd[2]}")}",
+          _ => throw new ArgumentOutOfRangeException(nameof(dateFormatOrder), $"Unexpected date format components' order: {dateFormatOrder}")
+        };
       }
       else {
-        return $"{startDate.ToString("dd.MM")} - {endDate.ToString("dd.MM.yyyy")}";
+        return dateFormatOrder switch {
+          DateFormatOrder.BigEndian => 
+            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")} - {endDate.ToString($"{ymd[1]}/{ymd[2]}")}",
+          DateFormatOrder.LittleEndian or DateFormatOrder.MiddleEndian =>
+            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}")} - {endDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")}",
+          _ => throw new ArgumentOutOfRangeException(nameof(dateFormatOrder), $"Unexpected date format components' order: {dateFormatOrder}")
+        };
       }
     }
     else {
-      return $"{startDate.ToString("dd.MM.yyyy")} - {endDate.ToString("dd.MM.yyyy")}";
+      return $"{startDate.ToString(dateFormat)} - {endDate.ToString(dateFormat)}";
     }
   }
 
