@@ -1,4 +1,5 @@
 using NoA.DateRange.Enums;
+using NoA.DateRange.Extensions;
 
 namespace NoA.DateRange.Services;
 
@@ -56,8 +57,23 @@ public class DateRangeService : IDateRangeService {
   /// <exception cref="ArgumentNullException">startDate or endDate is null</exception>
   /// <exception cref="FormatException">startDate or endDate does not contain a valid string representation of a date.</exception>
   public string CreateString(string startDate, string endDate) {
-    DateOnly parsedStartDate = DateOnly.Parse(startDate);
-    DateOnly parsedEndDate = DateOnly.Parse(endDate);
+    // Parse startDate
+    DateOnly parsedStartDate;
+    try {
+      parsedStartDate = new DateOnly().MultiCultureParse(startDate);
+    }
+    catch (FormatException) {
+      throw new FormatException("Start date does not contain a valid string representation of a date.");
+    }
+    // Parse endDate
+    DateOnly parsedEndDate;
+    try {
+      parsedEndDate = new DateOnly().MultiCultureParse(endDate);
+    }
+    catch (FormatException) {
+      throw new FormatException("End date does not contain valid string representation of a date.");
+    }
+    // Finally return created string
     return CreateString(parsedStartDate, parsedEndDate);
   }
 }
