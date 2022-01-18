@@ -1,9 +1,6 @@
-using System.Globalization;
-using System.Threading.Tasks;
-using Xunit;
 using NoA.DateRange.Services;
 
-namespace NoA.DateRange.Tests; 
+namespace NoA.DateRange.Tests;
 
 public class DateRangeServiceTest {
   public static IEnumerable<object[]> Data_CreateString_ValidInput_ValidResult = new List<object[]>() {
@@ -72,7 +69,7 @@ public class DateRangeServiceTest {
       Assert.Throws<FormatException>(createStringAction);
     });
   }
-  
+
   [Theory]
   [InlineData("en_US", "04/04/2000", "04/07/2000", "4/4 - 7/2000")]
   [InlineData("pl_PL", "04/07/2000", "07/07/2000", "04 - 07.07.2000")]
@@ -84,9 +81,9 @@ public class DateRangeServiceTest {
   [InlineData("pl_PL", "07/04/2000", "04/07/2001", "07.04.2000 - 04.07.2001")]
   [InlineData("af-NA", "2000-04-07", "2001-07-04", "2000-04-07 - 2001-07-04")]
   public async Task CreateString_DifferentCultures_ReturnsExpectedString(
-      string cultureName, 
-      string startDate, 
-      string endDate, 
+      string cultureName,
+      string startDate,
+      string endDate,
       string expectedResult) {
     // Arrange
     IDateRangeService service = new DateRangeService();

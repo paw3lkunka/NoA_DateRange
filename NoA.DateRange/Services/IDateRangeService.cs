@@ -5,11 +5,14 @@ namespace NoA.DateRange.Services;
 /// </summary>
 public interface IDateRangeService {
   /// <summary>
-  /// <p>Creates shorthand string representation of date range as follows:</p>
+  /// <p>
+  ///   Creates shorthand string representation of date range using the current thread culture.<br/>
+  ///   Shortening works as follows:
+  /// </p>
   /// <ul>
-  ///   <li><b>dd - dd.MM.yyyy</b> - when year and month is shared.</li>
-  ///   <li><b>dd.MM - dd.MM.yyyy</b> - when year is shared.</li>
-  ///   <li><b>dd.MM.yyyy - dd.MM.yyyy</b> - in all other cases.</li>
+  ///   <li>e.g. <b>dd - dd.MM.yyyy</b> - when year and month is shared.</li>
+  ///   <li>e.g. <b>dd.MM - dd.MM.yyyy</b> - when year is shared.</li>
+  ///   <li>e.g. <b>dd.MM.yyyy - dd.MM.yyyy</b> - in all other cases.</li>
   /// </ul>
   /// </summary>
   /// <param name="startDate">Start date of date range</param>

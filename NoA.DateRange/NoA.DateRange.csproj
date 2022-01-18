@@ -7,4 +7,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Using Include="System.Globalization" />
+    <Using Remove="System.IO" />
+    <Using Remove="System.Linq" />
+    <Using Remove="System.Net.Http" />
+    <Using Remove="System.Net.Threading" />
+    <Using Remove="System.Net.Threading.Tasks" />
+  </ItemGroup>
+
 </Project>

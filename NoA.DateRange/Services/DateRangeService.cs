@@ -1,9 +1,6 @@
-using System.Globalization;
-using System.Net.Mail;
-
 using NoA.DateRange.Enums;
 
-namespace NoA.DateRange.Services; 
+namespace NoA.DateRange.Services;
 
 /// <inheritdoc/>
 public class DateRangeService : IDateRangeService {
@@ -12,7 +9,7 @@ public class DateRangeService : IDateRangeService {
   public string CreateString(DateOnly startDate, DateOnly endDate) {
     // Check if arguments are valid
     if (startDate >= endDate) {
-      throw new ArgumentException("Start date must be an earlier date than end date");
+      throw new ArgumentException("Start date must be an earlier date than end date.");
     }
     // Get date format for current culture
     string dateFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
@@ -33,22 +30,20 @@ public class DateRangeService : IDateRangeService {
     if (startDate.Year == endDate.Year) {
       if (startDate.Month == endDate.Month) {
         return dateFormatOrder switch {
-          DateFormatOrder.BigEndian => 
-            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")} - {endDate.ToString(ymd[2])}",
-          DateFormatOrder.LittleEndian => 
+          DateFormatOrder.LittleEndian =>
             $"{startDate.ToString(ymd[0])} - {endDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")}",
-          DateFormatOrder.MiddleEndian => 
+          DateFormatOrder.MiddleEndian =>
             $"{startDate.ToString($"{ymd[0]}/{ymd[1]}")} - {endDate.ToString($"{ymd[1]}/{ymd[2]}")}",
-          _ => throw new ArgumentOutOfRangeException(nameof(dateFormatOrder), $"Unexpected date format components' order: {dateFormatOrder}")
+          DateFormatOrder.BigEndian or _ =>
+            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")} - {endDate.ToString(ymd[2])}",
         };
       }
       else {
         return dateFormatOrder switch {
-          DateFormatOrder.BigEndian => 
-            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")} - {endDate.ToString($"{ymd[1]}/{ymd[2]}")}",
           DateFormatOrder.LittleEndian or DateFormatOrder.MiddleEndian =>
             $"{startDate.ToString($"{ymd[0]}/{ymd[1]}")} - {endDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")}",
-          _ => throw new ArgumentOutOfRangeException(nameof(dateFormatOrder), $"Unexpected date format components' order: {dateFormatOrder}")
+          DateFormatOrder.BigEndian or _ =>
+            $"{startDate.ToString($"{ymd[0]}/{ymd[1]}/{ymd[2]}")} - {endDate.ToString($"{ymd[1]}/{ymd[2]}")}",
         };
       }
     }
