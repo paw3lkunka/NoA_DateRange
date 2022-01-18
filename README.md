@@ -7,7 +7,9 @@ Console app that takes two date strings as an input and shows date range between
 
 <h2>Locale dependency</h2>
 <p>
-    Both application input and output is dependant on current thread's locale settings.<br/>
+    Both application input and output is dependant on current thread's locale settings. It is set by the OS most of the time but you can use environment variable (LC_ALL on Linux) to change it temporarly.<br/>
+</p>
+<p>
     Following variables are defined:
 </p>
 <ul>
@@ -20,6 +22,8 @@ Console app that takes two date strings as an input and shows date range between
 <h3>Input</h3>
 <p>
     App takes two and only two arguments and tries to parse them to DateOnly struct.<br/>
+</p>
+<p>
     Arguments parsing has three possible results:
 </p>
 <ol>
@@ -34,6 +38,8 @@ Console app that takes two date strings as an input and shows date range between
 <h3>Output</h3>
 <p>
     Output format is always dependent on current culture default date format.<br/>
+</p>
+<p>
     Following arguments are defined:
 </p>
 <ul>
@@ -72,34 +78,50 @@ Console app that takes two date strings as an input and shows date range between
 </tbody>
 </table>
 
+<h2>Binary releases</h2>
+<p>You can download one of realeases I published for you:</p>
+<ul>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/77HN2VQJXW#B8sk8aDh2QLh">win-x64</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/7KAXP0CMRW#CR2otxLskcHd">win-x86</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/F144QYNSDR#FoWwm18JMbTi">linux-x64</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/54FN4VYQ3W#IMUXzzQsxzaU">linux-arm</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/8RXQ117J30#6GZJOOFYZYwk">osx-x64</a></li>
+</ul>
+<p>or build it on your own using guide in next section.</p>
 
 <h2>Build guide</h2>
 
 <h3>Windows x64</h3>
 <p>
-    Thanks to build configuration written in <b><i>NoA.DateRange/NoA.DateRange.csproj</i></b> Windows compilation is super easy.<br/>
+    Thanks to build configuration written in <b><i>NoA.DateRange/NoA.DateRange.csproj</i></b> Windows build is super easy.<br/>
+</p>
+<p>
     While in repo's root directory execute:
 </p>
 
 > $ dotnet publish -c Release
 
-<p>You'll find executable in <i><b>NoA.DateRange/bin/Release/net6.0/win-x64/publish/</b></i> folder</p>
+<p>You'll find executable in <i><b>NoA.DateRange/bin/Release/net6.0/win-x64/publish/</b></i> folder.</p>
 
 <h3>Other OS</h3>
-<p>If you need to build app for other OS like linux or macOS first you'll need to check its runtime ID (RID):</p>
+<p>
+    If you need to build app for other OS like linux or macOS first you'll need to check its runtime ID (RID):
+</p>
 <ul>
-    <li>Go to <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/rid-catalog">.NET RID Catalog</a> and find the one right for your OS</li>
+    <li>Go to <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/rid-catalog">.NET RID Catalog</a> and find the one that is right for your OS</li>
     <li>Most popular RIDs will be <i>linux-x64</i>, <i>osx-x64</i> and <i>win-x64</i> (used implicityly in MSBuild)</li>
 </ul>
-<p>While in repo's root directory execute:</p>
+<p>
+    While in repo's root directory execute:
+</p>
 
 > $ dotnet publish -c Release -r <i>&#60;RID&#62;</i> --self-contained 
 
-<p>You'll find executable in <i><b>NoA.DateRange/bin/Release/net6.0/&#60;RID&#62;/publish/</b></i> folder</p>
+<p>You'll find executable in <i><b>NoA.DateRange/bin/Release/net6.0/&#60;RID&#62;/publish/</b></i> folder.</p>
 
-<h3>Troubleshooting</h3>
+<h2>Troubleshooting</h2>
 
-<h5>Disable trimming</h5>
+<h3>Disable trimming</h3>
 <p>If you'll encounter any problems with the app please try replacing following line in <b><i>NoA.DateRange/NoA.DateRange.csproj</i></b> file:</p>
 
 > &#60;PublishTrimmed&#62;true&#60;/PublishTrimmed&#62;
@@ -108,17 +130,7 @@ with
 
 > &#60;PublishTrimmed&#62;false&#60;/PublishTrimmed&#62;
 
-<p>This line enables so-called <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/deploying/trimming/trimming-options">trimming</a> that may cause breakage for some of the builds.</p>
+<p>This line enables so-called <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/deploying/trimming/trimming-options">trimming</a> that may cause problems with dependencies for some of the builds.</p>
 
-<h5>Lack of libicu on Linux</h5>
+<h3>Lack of libicu on Linux</h3>
 <p>Make sure you have installed <a target="_blank" href="https://pkgs.org/download/libicu">libicu</a> or another substitute library that provides globalization functionalities.</p>
-
-<h2>Binary releases</h2>
-<p>You can also download one of realeases I published for you:</p>
-<ul>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/77HN2VQJXW#B8sk8aDh2QLh">win-x64</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/7KAXP0CMRW#CR2otxLskcHd">win-x86</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/F144QYNSDR#FoWwm18JMbTi">linux-x64</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/54FN4VYQ3W#IMUXzzQsxzaU">linux-arm</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/8RXQ117J30#6GZJOOFYZYwk">osx-x64</a></li>
-</ul>
