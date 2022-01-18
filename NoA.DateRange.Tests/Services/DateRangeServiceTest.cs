@@ -1,6 +1,6 @@
 using NoA.DateRange.Services;
 
-namespace NoA.DateRange.Tests;
+namespace NoA.DateRange.Tests.Services;
 
 public class DateRangeServiceTest {
   public static IEnumerable<object[]> Data_CreateString_ValidInput_ValidResult = new List<object[]>() {
