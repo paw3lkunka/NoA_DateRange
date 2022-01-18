@@ -1,13 +1,13 @@
 <h1>NoA Date Range</h1>
 
-Console app that takes two date strings as an input and shows date range between them as an output.
+Console app that takes two date strings arguments as an input and shows date range between them as an output.
 
 <img src=".readme/NoA_DateRange_in_terminal.png"/>
 
 
 <h2>Locale dependency</h2>
 <p>
-    Both application input and output is dependant on current thread's locale settings. It is set by the OS most of the time but you can use environment variable (LC_ALL on Linux) to change it temporarly.<br/>
+    Both application input and output is dependent on current thread's locale settings. It is set by the OS most of the time but you can use environment variable (LC_ALL on Linux) to change it temporarly.<br/>
 </p>
 <p>
     Following variables are defined:
@@ -123,7 +123,7 @@ Console app that takes two date strings as an input and shows date range between
 <p>You'll find executable in <i><b>NoA.DateRange/bin/Release/net6.0/&#60;RID&#62;/publish/</b></i> folder.</p>
 
 <h3>How to run unit tests</h3>
-<p>To run unit tests you can use the following comman in repo's root directory:</p>
+<p>To run unit tests you can use the following command in repo's root directory:</p>
 
 > $ dotnet test
 
