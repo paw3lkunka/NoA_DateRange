@@ -88,7 +88,7 @@ Console app that takes two date strings as an input and shows date range between
 <h3>Other OS</h3>
 <p>If you need to build app for other OS like linux or macOS first you'll need to check its runtime ID (RID):</p>
 <ul>
-    <li>Go to <a href="https://docs.microsoft.com/en-us/dotnet/core/rid-catalog">.NET RID Catalog</a> and find the one right for your OS</li>
+    <li>Go to <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/rid-catalog">.NET RID Catalog</a> and find the one right for your OS</li>
     <li>Most popular RIDs will be <i>linux-x64</i>, <i>osx-x64</i> and <i>win-x64</i> (used implicityly in MSBuild)</li>
 </ul>
 <p>While in repo's root directory execute:</p>
@@ -108,17 +108,17 @@ with
 
 > &#60;PublishTrimmed&#62;false&#60;/PublishTrimmed&#62;
 
-<p>This line enables so-called <a href="https://docs.microsoft.com/en-us/dotnet/core/deploying/trimming/trimming-options">trimming</a> that may cause breakage for some of the builds.</p>
+<p>This line enables so-called <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/deploying/trimming/trimming-options">trimming</a> that may cause breakage for some of the builds.</p>
 
 <h5>Lack of libicu on Linux</h5>
-<p>Make sure you have installed <a href="https://pkgs.org/download/libicu">libicu</a> or another substitute library that provides globalization functionalities.</p>
+<p>Make sure you have installed <a target="_blank" href="https://pkgs.org/download/libicu">libicu</a> or another substitute library that provides globalization functionalities.</p>
 
 <h2>Binary releases</h2>
 <p>You can also download one of realeases I published for you:</p>
 <ul>
-    <li><a href="https://drive.protonmail.com/urls/77HN2VQJXW#B8sk8aDh2QLh">win-x64</a></li>
-    <li><a href="https://drive.protonmail.com/urls/7KAXP0CMRW#CR2otxLskcHd">win-x86</a></li>
-    <li><a href="https://drive.protonmail.com/urls/F144QYNSDR#FoWwm18JMbTi">linux-x64</a></li>
-    <li><a href="https://drive.protonmail.com/urls/54FN4VYQ3W#IMUXzzQsxzaU">linux-arm</a></li>
-    <li><a href="https://drive.protonmail.com/urls/8RXQ117J30#6GZJOOFYZYwk">osx-x64</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/77HN2VQJXW#B8sk8aDh2QLh">win-x64</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/7KAXP0CMRW#CR2otxLskcHd">win-x86</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/F144QYNSDR#FoWwm18JMbTi">linux-x64</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/54FN4VYQ3W#IMUXzzQsxzaU">linux-arm</a></li>
+    <li><a target="_blank" href="https://drive.protonmail.com/urls/8RXQ117J30#6GZJOOFYZYwk">osx-x64</a></li>
 </ul>
