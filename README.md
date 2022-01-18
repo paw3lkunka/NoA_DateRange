@@ -91,6 +91,9 @@ Console app that takes two date strings as an input and shows date range between
 
 <h2>Build guide</h2>
 
+<h3>Prerequisites</h3>
+<p>To build the solution you'll need <a target="_blank" href="https://dotnet.microsoft.com/en-us/download">.NET SDK 6.0.100 or higher</a> installed.</p>
+
 <h3>Windows x64</h3>
 <p>
     Thanks to build configuration written in <b><i>NoA.DateRange/NoA.DateRange.csproj</i></b> Windows build is super easy.<br/>
@@ -118,6 +121,11 @@ Console app that takes two date strings as an input and shows date range between
 > $ dotnet publish -c Release -r <i>&#60;RID&#62;</i> --self-contained 
 
 <p>You'll find executable in <i><b>NoA.DateRange/bin/Release/net6.0/&#60;RID&#62;/publish/</b></i> folder.</p>
+
+<h3>How to run unit tests</h3>
+<p>To run unit tests you can use the following comman in repo's root directory:</p>
+
+> $ dotnet test
 
 <h2>Troubleshooting</h2>
 
