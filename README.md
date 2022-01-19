@@ -1,22 +1,25 @@
 <h1>NoA Date Range</h1>
 
-Console app that takes two date strings arguments as an input and shows date range between them as an output.
+Console app that takes two date strings arguments as an input and prints shorthand date range between them as an output.
 
-<img src=".readme/NoA_DateRange_in_terminal.png"/>
+<img alt="Demonstration of program usage in the terminal" src=".readme/NoA_DateRange_in_terminal.png"/>
 
 
 <h2>Locale dependency</h2>
 <p>
-    Both application input and output is dependent on current thread's locale settings. It is set by the OS most of the time but you can use environment variable (LC_ALL on Linux) to change it temporarly.<br/>
+    Application's input and output both are dependent on current thread's locale settings (current culture). These are set by the OS most of the time but you can use environmental variables (e.g. <i>LC_ALL</i> on Linux) or set it per-thread to change it temporarly.<br/>
 </p>
 <p>
-    Following variables are defined:
+    Following variables are defined for further subsections:
 </p>
 <ul>
-    <li><b>Y</b> - format of date <b>year</b> fragmet e.g. <i>"yyyy"</i> or <i>"yy"</i></li>
-    <li><b>M</b> - format of date <b>month</b> fragmet e.g. <i>"MM"</i> or <i>"M"</i></li>
-    <li><b>D</b> - format of date <b>dat</b> fragmet e.g. <i>"dd"</i> or <i>"d"</i></li>
-    <li><b>/</b> - format of date <b>separator</b> e.g. <i>'/'</i> or <i>'.'</i></li>
+    <li><b>Y</b> - current culture's format of date <b>year</b> fragmet e.g. <i>"yyyy"</i> or <i>"yy"</i></li>
+    <li><b>M</b> - current culture's format of date <b>month</b> fragmet e.g. <i>"MM"</i> or <i>"M"</i></li>
+    <li><b>D</b> - current culture's format of date <b>dat</b> fragmet e.g. <i>"dd"</i> or <i>"d"</i></li>
+    <li><b>/</b> - current culture's format of date <b>separator</b> e.g. <i>'/'</i> or <i>'.'</i></li>
+    <li><i>y1, y2</i> - to express <b><i>year</i></b> value of start date and end date of date range</li>
+    <li><i>m1, m2</i> - to express <b><i>month</i></b> value of start date and end date of date range</li>
+    <li><i>d1, d2</i> - to express <b><i>day</i></b> value of start date and end date of date range</li>
 </ul>
 
 <h3>Input</h3>
@@ -27,26 +30,18 @@ Console app that takes two date strings arguments as an input and shows date ran
     Arguments parsing has three possible results:
 </p>
 <ol>
-    <li>Passed string is valid date in current thread culture e.g. <i>"Y-M-D"</i> or <i>"M/D/Y"</i> for <b>en_US</b> locale</li>
+    <li>Passed string is a valid date in current thread's culture e.g. <i>"yyyy-MM-dd"</i> or <i>"MM/dd/yyyy"</i> for <b>en_US</b> locale</li>
     <li>
-        Passed string is not valid date format for current culture, thus app tries to parse it with available specific cultures.
-        First culture for which date format is valid is taken for parsing.
+        Passed string is not a valid date format for current culture, thus app tries to parse it with other available specific cultures.
+        First culture for which the date format is valid is taken for parsing.
     </li>
     <li>Passed string does not contain any valid date formats, thus program finishes execution.</li>
 </ol>
 
 <h3>Output</h3>
 <p>
-    Output format is always dependent on current culture default date format.<br/>
+    Output format is always dependent on current culture's default date format.<br/>
 </p>
-<p>
-    Following arguments are defined:
-</p>
-<ul>
-    <li><i>y1, y2</i> - to express <b><i>year</i></b> value of start date and end date of date range</li>
-    <li><i>m1, m2</i> - to express <b><i>month</i></b> value of start date and end date of date range</li>
-    <li><i>d1, d2</i> - to express <b><i>day</i></b> value of start date and end date of date range</li>
-</ul>
 <table>
 <thead>
     <tr>
@@ -108,7 +103,7 @@ Console app that takes two date strings arguments as an input and shows date ran
 
 <h3>Other OS</h3>
 <p>
-    If you need to build app for other OS like linux or macOS first you'll need to check its runtime ID (RID):
+    If you need to build app for other OS like GNU/Linux or MacOS first you'll need to check its runtime ID (RID):
 </p>
 <ul>
     <li>Go to <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/rid-catalog">.NET RID Catalog</a> and find the one that is right for your OS</li>
