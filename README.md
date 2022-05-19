@@ -74,15 +74,7 @@ Console app that takes two date strings arguments as an input and prints shortha
 </table>
 
 <h2>Binary releases</h2>
-<p>You can download one of realeases I published for you:</p>
-<ul>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/77HN2VQJXW#B8sk8aDh2QLh">win-x64</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/7KAXP0CMRW#CR2otxLskcHd">win-x86</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/F144QYNSDR#FoWwm18JMbTi">linux-x64</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/54FN4VYQ3W#IMUXzzQsxzaU">linux-arm</a></li>
-    <li><a target="_blank" href="https://drive.protonmail.com/urls/8RXQ117J30#6GZJOOFYZYwk">osx-x64</a></li>
-</ul>
-<p>or build it on your own using guide in next section.</p>
+<p>Binary releases are no longer available, sorry for that :) You can still build it on your own using the guide in next section.</p>
 
 <h2>Build guide</h2>
 
